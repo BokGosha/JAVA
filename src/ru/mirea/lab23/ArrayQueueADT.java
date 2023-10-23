@@ -1,47 +1,58 @@
 package ru.mirea.lab23;
 
-import javax.lang.model.element.Element;
 import java.util.NoSuchElementException;
 
-public class ArrayQueueADT {
-    private final int MAX_SIZE = 10;
-    private final Object[] queue = new Object[MAX_SIZE];
-    private int front = -1;
-    private int rear = -1;
+//******************************************** Инвариант структуры данных "очередь" **************************************************
+// Размер очереди всегда неотрицателен и не превышает максимального размера (количество элементов, которое может содержаться в очереди);
+// Если очередь пуста, то указатели на первый и последний элементы равны null;
+// Если очередь не пуста, то указатели на первый и последний элементы указывают на соответствующие элементы в массиве данных.
+//************************************************************************************************************************************
 
-    public boolean isEmpty() {
-        return front == -1;
+public class ArrayQueueADT {
+    private final int      MAX_SIZE = 10;                   // максимальный размер очереди
+    private final Object[] queue = new Object[MAX_SIZE];    // очередь
+    private int            front = -1;                      // указатель на первый элемент
+    private int            rear = -1;                       // указатель на последний элемент
+
+    // Предусловие: очередь может быть и пустой, и непустой;
+    // Постусловие: состояние очереди не изменяется.
+    public boolean isEmpty(ArrayQueueADT array) {
+        return array.front == -1 && array.rear == -1;
     }
 
-    public void enqueue(Element element) {
-        if (front == 0 && rear == MAX_SIZE - 1) {
+    // Предусловие: очередь не пуста;
+    // Постусловие: новый элемент успешно вставлен в конец очереди.
+    public void enQueue(ArrayQueueADT array, Object element) {
+        if (array.front == 0 && array.rear == MAX_SIZE - 1) {
             throw new IllegalStateException("Queue is full");
         } else {
-            if (front == -1) {
-                front = 0;
+            if (array.front == -1) {
+                array.front = 0;
             }
-            rear++;
+            array.rear++;
 
-            queue[rear] = element;
+            array.queue[array.rear] = element;
 
             System.out.println("Insert " + element);
         }
     }
 
-    public Element dequeue() {
-        Element element;
+    // Предусловие: очередь не пуста;
+    // Постусловие: первый элемент очереди успешно удален.
+    public Object deQueue(ArrayQueueADT array) {
+        Object element;
 
-        if (isEmpty()) {
+        if (isEmpty(array)) {
             throw new NoSuchElementException("Queue is empty");
         } else {
-            element = (Element) queue[front];
-            queue[front] = null;
+            element = array.queue[array.front];
+            array.queue[array.front] = null;
 
-            if (front >= rear) {
-                front = -1;
-                rear = -1;
+            if (array.front >= array.rear) {
+                array.front = -1;
+                array.rear = -1;
             } else {
-                front++;
+                array.front++;
             }
             System.out.println(element + " Deleted");
 
@@ -49,35 +60,42 @@ public class ArrayQueueADT {
         }
     }
 
-    public Integer size() {
-        if (isEmpty()) {
+    // Предусловие: очередь не пуста;
+    // Постусловие: состояние очереди не изменяется.
+    public int size(ArrayQueueADT array) {
+        if (isEmpty(array)) {
             return 0;
         }
-        if (front <= rear) {
-            return rear - front + 1;
+
+        if (array.front <= array.rear) {
+            return array.rear - array.front + 1;
         } else {
-            return MAX_SIZE - front + rear + 1;
+            return MAX_SIZE - array.front + array.rear + 1;
         }
     }
 
-    public Element element() {
-        if (isEmpty()) {
+    // Предусловие: очередь не пуста;
+    // Постусловие: состояние очереди не изменяется.
+    public Object element(ArrayQueueADT array) {
+        if (isEmpty(array)) {
             throw new NoSuchElementException("Queue is empty");
         }
 
-        return (Element) queue[front];
+        return array.queue[array.front];
     }
 
-    public void clear() {
-        if (isEmpty()) {
+    // Предусловие: очередь может быть и пустой, и непустой;
+    // Постусловие: все элементы очереди успешно удалены.
+    public void clear(ArrayQueueADT array) {
+        if (isEmpty(array)) {
             return;
         }
 
-        for (int i = 0; i < size(); i++) {
-            queue[i] = null;
+        for (int i = 0; i < size(array); i++) {
+            array.queue[i] = null;
         }
 
-        rear = -1;
-        front = -1;
+        array.rear = -1;
+        array.front = -1;
     }
 }

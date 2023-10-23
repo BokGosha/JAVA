@@ -1,19 +1,28 @@
 package ru.mirea.lab23;
 
-import javax.lang.model.element.Element;
 import java.util.NoSuchElementException;
 
-public class ArrayQueueModule {
-    private final int MAX_SIZE = 10;
-    private final Object[] queue = new Object[MAX_SIZE];
-    private int front = -1;
-    private int rear = -1;
+//******************************************** Инвариант структуры данных "очередь" **************************************************
+// Размер очереди всегда неотрицателен и не превышает максимального размера (количество элементов, которое может содержаться в очереди);
+// Если очередь пуста, то указатели на первый и последний элементы равны null;
+// Если очередь не пуста, то указатели на первый и последний элементы указывают на соответствующие элементы в массиве данных.
+//************************************************************************************************************************************
 
+public class ArrayQueueModule {
+    private final int      MAX_SIZE = 10;                   // максимальный размер очереди
+    private final Object[] queue = new Object[MAX_SIZE];    // очередь
+    private int            front = -1;                      // указатель на первый элемент
+    private int            rear = -1;                       // указатель на последний элемент
+
+    // Предусловие: очередь может быть и пустой, и непустой;
+    // Постусловие: состояние очереди не изменяется.
     public boolean isEmpty() {
-        return front == -1;
+        return front == -1 && rear == -1;
     }
 
-    public void enqueue(Element element) {
+    // Предусловие: очередь не пуста;
+    // Постусловие: новый элемент успешно вставлен в конец очереди.
+    public void enQueue(Object element) {
         if (front == 0 && rear == MAX_SIZE - 1) {
             throw new IllegalStateException("Queue is full");
         } else {
@@ -28,13 +37,15 @@ public class ArrayQueueModule {
         }
     }
 
-    public Element dequeue() {
-        Element element;
+    // Предусловие: очередь не пуста;
+    // Постусловие: первый элемент очереди успешно удален.
+    public Object deQueue() {
+        Object element;
 
         if (isEmpty()) {
             throw new NoSuchElementException("Queue is empty");
         } else {
-            element = (Element) queue[front];
+            element = queue[front];
             queue[front] = null;
 
             if (front >= rear) {
@@ -49,10 +60,13 @@ public class ArrayQueueModule {
         }
     }
 
-    public Integer size() {
+    // Предусловие: очередь не пуста;
+    // Постусловие: состояние очереди не изменяется.
+    public int size() {
         if (isEmpty()) {
             return 0;
         }
+
         if (front <= rear) {
             return rear - front + 1;
         } else {
@@ -60,14 +74,18 @@ public class ArrayQueueModule {
         }
     }
 
-    public Element element() {
+    // Предусловие: очередь не пуста;
+    // Постусловие: состояние очереди не изменяется.
+    public Object element() {
         if (isEmpty()) {
             throw new NoSuchElementException("Queue is empty");
         }
 
-        return (Element) queue[front];
+        return queue[front];
     }
 
+    // Предусловие: очередь можеты быть и пустой, и непустой;
+    // Постусловие: все элементы очереди успешно удалены.
     public void clear() {
         if (isEmpty()) {
             return;
