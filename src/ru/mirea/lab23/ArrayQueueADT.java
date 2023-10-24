@@ -16,15 +16,16 @@ public class ArrayQueueADT {
 
     // Предусловие: очередь может быть и пустой, и непустой;
     // Постусловие: состояние очереди не изменяется.
-    public boolean isEmpty(ArrayQueueADT array) {
-        return array.front == -1 && array.rear == -1;
+    public static boolean isEmpty(ArrayQueueADT array) {
+        return array.rear == -1 && array.front == -1;
     }
 
     // Предусловие: очередь не пуста;
     // Постусловие: новый элемент успешно вставлен в конец очереди.
-    public void enQueue(ArrayQueueADT array, Object element) {
-        if (array.front == 0 && array.rear == MAX_SIZE - 1) {
-            throw new IllegalStateException("Queue is full");
+    public static void enQueue(ArrayQueueADT array, Object element) {
+        if (array.front == 0 && array.rear == array.MAX_SIZE - 1) {
+            System.out.println("Queue is full! It cannot add more values");
+            System.exit(1);
         } else {
             if (array.front == -1) {
                 array.front = 0;
@@ -33,17 +34,18 @@ public class ArrayQueueADT {
 
             array.queue[array.rear] = element;
 
-            System.out.println("Insert " + element);
+            System.out.println(element + " is inserted");
         }
     }
 
     // Предусловие: очередь не пуста;
     // Постусловие: первый элемент очереди успешно удален.
-    public Object deQueue(ArrayQueueADT array) {
+    public static Object deQueue(ArrayQueueADT array) {
         Object element;
 
         if (isEmpty(array)) {
-            throw new NoSuchElementException("Queue is empty");
+            System.out.println("No items in the queue! It cannot delete");
+            return 0;
         } else {
             element = array.queue[array.front];
             array.queue[array.front] = null;
@@ -54,7 +56,7 @@ public class ArrayQueueADT {
             } else {
                 array.front++;
             }
-            System.out.println(element + " Deleted");
+            System.out.println(element + " is deleted");
 
             return element;
         }
@@ -62,23 +64,20 @@ public class ArrayQueueADT {
 
     // Предусловие: очередь не пуста;
     // Постусловие: состояние очереди не изменяется.
-    public int size(ArrayQueueADT array) {
+    public static int size(ArrayQueueADT array) {
         if (isEmpty(array)) {
             return 0;
         }
 
-        if (array.front <= array.rear) {
-            return array.rear - array.front + 1;
-        } else {
-            return MAX_SIZE - array.front + array.rear + 1;
-        }
+        return array.rear - array.front + 1;
     }
 
     // Предусловие: очередь не пуста;
     // Постусловие: состояние очереди не изменяется.
-    public Object element(ArrayQueueADT array) {
+    public static Object element(ArrayQueueADT array) {
         if (isEmpty(array)) {
-            throw new NoSuchElementException("Queue is empty");
+            System.out.println("Queue is empty!");
+            System.exit(1);
         }
 
         return array.queue[array.front];
@@ -86,9 +85,10 @@ public class ArrayQueueADT {
 
     // Предусловие: очередь может быть и пустой, и непустой;
     // Постусловие: все элементы очереди успешно удалены.
-    public void clear(ArrayQueueADT array) {
+    public static void clear(ArrayQueueADT array) {
         if (isEmpty(array)) {
-            return;
+            System.out.println("Queue is empty!");
+            System.exit(1);
         }
 
         for (int i = 0; i < size(array); i++) {

@@ -1,4 +1,69 @@
 package ru.mirea.lab23;
 
 public class LinkedQueue {
+    private Node front; // указатель на первый элемент
+    private Node rear; // указатель на последний элемент
+    private int size; // размер очереди
+
+    private class Node {
+        Object element; // элемент узла
+        Node next; // ссылка на следующий узел
+
+        public Node(Object element) {
+            this.element = element;
+            this.next = null;
+        }
+    }
+
+    public void enQueue(Object element) {
+        Node newNode = new Node(element);
+
+        if (isEmpty()) {
+            front = newNode;
+        } else {
+            rear.next = newNode;
+        }
+        rear = newNode;
+
+        size++;
+
+        System.out.println(element + " is inserted");
+    }
+
+    public Object element() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty!");
+            System.exit(1);
+        }
+
+        return front.element;
+    }
+
+    public Object deQueue() {
+        if (isEmpty()) {
+            System.out.println("No items in the queue! It cannot delete");
+            return 0;
+        }
+        Object dequeuedElement = front.element;
+        System.out.println(dequeuedElement + " is deleted");
+
+        front = front.next;
+        size--;
+
+        return dequeuedElement;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void clear() {
+        front = null;
+        rear = null;
+        size = 0;
+    }
 }

@@ -17,14 +17,15 @@ public class ArrayQueue extends AbstractQueue {
     // Предусловие: очередь может быть и пустой, и непустой;
     // Постусловие: состояние очереди не изменяется.
     public boolean isEmpty() {
-        return front == -1 && rear == -1;
+        return rear == -1 && front == -1;
     }
 
     // Предусловие: очередь не пуста;
     // Постусловие: новый элемент успешно вставлен в конец очереди.
     public void enQueue(Object element) {
         if (front == 0 && rear == MAX_SIZE - 1) {
-            throw new IllegalStateException("Queue is full");
+            System.out.println("Queue is full! It cannot add more values");
+            System.exit(1);
         } else {
             if (front == -1) {
                 front = 0;
@@ -33,7 +34,7 @@ public class ArrayQueue extends AbstractQueue {
 
             queue[rear] = element;
 
-            System.out.println("Insert " + element);
+            System.out.println(element + " is inserted");
         }
     }
 
@@ -43,7 +44,8 @@ public class ArrayQueue extends AbstractQueue {
         Object element;
 
         if (isEmpty()) {
-            throw new NoSuchElementException("Queue is empty");
+            System.out.println("Queue is empty! It cannot be deleted");
+            return 0;
         } else {
             element = queue[front];
             queue[front] = null;
@@ -54,7 +56,7 @@ public class ArrayQueue extends AbstractQueue {
             } else {
                 front++;
             }
-            System.out.println(element + " Deleted");
+            System.out.println(element + " is deleted");
 
             return element;
         }
@@ -67,28 +69,26 @@ public class ArrayQueue extends AbstractQueue {
             return 0;
         }
 
-        if (front <= rear) {
-            return rear - front + 1;
-        } else {
-            return MAX_SIZE - front + rear + 1;
-        }
+        return rear - front + 1;
     }
 
     // Предусловие: очередь не пуста;
     // Постусловие: состояние очереди не изменяется.
     public Object element() {
         if (isEmpty()) {
-            throw new NoSuchElementException("Queue is empty");
+            System.out.println("Queue is empty!");
+            System.exit(1);
         }
 
         return queue[front];
     }
 
-    // Предусловие: очередь можеты быть и пустой, и непустой;
+    // Предусловие: очередь может быть и пустой, и непустой;
     // Постусловие: все элементы очереди успешно удалены.
     public void clear() {
         if (isEmpty()) {
-            return;
+            System.out.println("Queue is empty!");
+            System.exit(1);
         }
 
         for (int i = 0; i < size(); i++) {
