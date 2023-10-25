@@ -2,7 +2,7 @@ package ru.mirea.lab23;
 
 public class Tester {
     public static void main(String[] args) {
-        ArrayQueueModule array = new ArrayQueueModule();
+        ArrayQueueModule array = ArrayQueueModule.getInstance();
 
         array.enQueue(3);
         array.enQueue(5);

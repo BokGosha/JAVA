@@ -10,29 +10,38 @@ import java.util.NoSuchElementException;
 
 public class ArrayQueueModule {
     private final int      MAX_SIZE = 10;                   // максимальный размер очереди
-    private final Object[] queue = new Object[MAX_SIZE];    // очередь
+    private final Object[] array = new Object[MAX_SIZE];    // очередь
     private int            front = -1;                      // указатель на первый элемент
     private int            rear = -1;                       // указатель на последний элемент
+    private static ArrayQueueModule queue;
+
+    public static ArrayQueueModule getInstance() {
+        if (queue == null) {
+            queue = new ArrayQueueModule();
+        }
+
+        return queue;
+    }
 
     // Предусловие: очередь может быть и пустой, и непустой;
     // Постусловие: состояние очереди не изменяется.
     public boolean isEmpty() {
-        return rear == -1 && front == -1;
+        return queue.rear == -1 && queue.front == -1;
     }
 
     // Предусловие: очередь не пуста;
     // Постусловие: новый элемент успешно вставлен в конец очереди.
     public void enQueue(Object element) {
-        if (front == 0 && rear == MAX_SIZE - 1) {
+        if (queue.front == 0 && queue.rear == queue.MAX_SIZE - 1) {
             System.out.println("Queue is full! It cannot add more values");
             System.exit(1);
         } else {
-            if (front == -1) {
-                front = 0;
+            if (queue.front == -1) {
+                queue.front = 0;
             }
-            rear++;
+            queue.rear++;
 
-            queue[rear] = element;
+            queue.array[queue.rear] = element;
 
             System.out.println(element + " is inserted");
         }
@@ -47,14 +56,14 @@ public class ArrayQueueModule {
             System.out.println("No items in the queue! It cannot delete");
             return 0;
         } else {
-            element = queue[front];
-            queue[front] = null;
+            element = queue.array[queue.front];
+            queue.array[queue.front] = null;
 
-            if (front >= rear) {
-                front = -1;
-                rear = -1;
+            if (queue.front >= queue.rear) {
+                queue.front = -1;
+                queue.rear = -1;
             } else {
-                front++;
+                queue.front++;
             }
             System.out.println(element + " is deleted");
 
@@ -69,7 +78,7 @@ public class ArrayQueueModule {
             return 0;
         }
 
-        return rear - front + 1;
+        return queue.rear - queue.front + 1;
     }
 
     // Предусловие: очередь не пуста;
@@ -80,7 +89,7 @@ public class ArrayQueueModule {
             System.exit(1);
         }
 
-        return queue[front];
+        return queue.array[queue.front];
     }
 
     // Предусловие: очередь может быть и пустой, и непустой;
@@ -92,10 +101,10 @@ public class ArrayQueueModule {
         }
 
         for (int i = 0; i < size(); i++) {
-            queue[i] = null;
+            queue.array[i] = null;
         }
 
-        rear = -1;
-        front = -1;
+        queue.rear = -1;
+        queue.front = -1;
     }
 }

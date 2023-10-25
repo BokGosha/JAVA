@@ -1,11 +1,11 @@
 package ru.mirea.lab23;
 
-public class LinkedQueue {
+public class LinkedQueue extends AbstractQueue {
     private Node front; // указатель на первый элемент
     private Node rear; // указатель на последний элемент
     private int size; // размер очереди
 
-    private class Node {
+    private static class Node {
         Object element; // элемент узла
         Node next; // ссылка на следующий узел
 
