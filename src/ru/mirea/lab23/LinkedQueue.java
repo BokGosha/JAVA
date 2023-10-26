@@ -15,6 +15,7 @@ public class LinkedQueue extends AbstractQueue {
         }
     }
 
+    @Override
     public void enQueue(Object element) {
         Node newNode = new Node(element);
 
@@ -30,6 +31,7 @@ public class LinkedQueue extends AbstractQueue {
         System.out.println(element + " is inserted");
     }
 
+    @Override
     public Object element() {
         if (isEmpty()) {
             System.out.println("Queue is empty!");
@@ -39,6 +41,7 @@ public class LinkedQueue extends AbstractQueue {
         return front.element;
     }
 
+    @Override
     public Object deQueue() {
         if (isEmpty()) {
             System.out.println("No items in the queue! It cannot delete");
@@ -53,14 +56,17 @@ public class LinkedQueue extends AbstractQueue {
         return dequeuedElement;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    @Override
     public void clear() {
         front = null;
         rear = null;

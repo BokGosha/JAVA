@@ -1,7 +1,5 @@
 package ru.mirea.lab23;
 
-import java.util.NoSuchElementException;
-
 //******************************************** Инвариант структуры данных "очередь" **************************************************
 // Размер очереди всегда неотрицателен и не превышает максимального размера (количество элементов, которое может содержаться в очереди);
 // Если очередь пуста, то указатели на первый и последний элементы равны null;
@@ -16,12 +14,14 @@ public class ArrayQueue extends AbstractQueue {
 
     // Предусловие: очередь может быть и пустой, и непустой;
     // Постусловие: состояние очереди не изменяется.
+    @Override
     public boolean isEmpty() {
         return rear == -1 && front == -1;
     }
 
     // Предусловие: очередь не пуста;
     // Постусловие: новый элемент успешно вставлен в конец очереди.
+    @Override
     public void enQueue(Object element) {
         if (front == 0 && rear == MAX_SIZE - 1) {
             System.out.println("Queue is full! It cannot add more values");
@@ -40,6 +40,7 @@ public class ArrayQueue extends AbstractQueue {
 
     // Предусловие: очередь не пуста;
     // Постусловие: первый элемент очереди успешно удален.
+    @Override
     public Object deQueue() {
         Object element;
 
@@ -64,6 +65,7 @@ public class ArrayQueue extends AbstractQueue {
 
     // Предусловие: очередь не пуста;
     // Постусловие: состояние очереди не изменяется.
+    @Override
     public int size() {
         if (isEmpty()) {
             return 0;
@@ -74,6 +76,7 @@ public class ArrayQueue extends AbstractQueue {
 
     // Предусловие: очередь не пуста;
     // Постусловие: состояние очереди не изменяется.
+    @Override
     public Object element() {
         if (isEmpty()) {
             System.out.println("Queue is empty!");
@@ -85,6 +88,7 @@ public class ArrayQueue extends AbstractQueue {
 
     // Предусловие: очередь может быть и пустой, и непустой;
     // Постусловие: все элементы очереди успешно удалены.
+    @Override
     public void clear() {
         if (isEmpty()) {
             System.out.println("Queue is empty!");
