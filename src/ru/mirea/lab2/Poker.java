@@ -10,14 +10,15 @@ public class Poker {
         String m;
 
         for (int i = 0; i < 4; i++) {
-            if (i == 0)
+            if (i == 0) {
                 m = "Черви";
-            else if (i == 1)
+            } else if (i == 1) {
                 m = "Пики";
-            else if (i == 2)
+            } else if (i == 2) {
                 m = "Буби";
-            else
+            } else {
                 m = "Крести";
+            }
 
             cards.add("2 " + m);
             cards.add("3 " + m);
@@ -33,6 +34,7 @@ public class Poker {
             cards.add("Король " + m);
             cards.add("Туз " + m);
         }
+
         Collections.shuffle(cards);
 
         Scanner sc = new Scanner(System.in);
@@ -41,9 +43,9 @@ public class Poker {
 
         int n = sc.nextInt();
 
-        if (n >= 11)
+        if (n >= 11) {
             System.out.println("Некорректное число игроков");
-        else {
+        } else {
             for (int i = 0; i < n; i++) {
                 System.out.printf("Карты %1$d-го игрока: ", i + 1);
 

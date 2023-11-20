@@ -1,4 +1,5 @@
 package ru.mirea.lab1;
+
 import java.util.Scanner;
 
 public class task_2 {
@@ -17,6 +18,7 @@ public class task_2 {
             i++;
         }
         while (i < array.length);
+
         System.out.println("Сумма элементов массива: " + sum);
 
         int z = 0;
@@ -25,8 +27,10 @@ public class task_2 {
             if (max < array[z]) {
                 max = array[z];
             }
+
             z++;
         }
+
         System.out.println("Максимальный элемент массива: " + max);
 
         int min = array[0];
@@ -35,6 +39,7 @@ public class task_2 {
                 min = array[q];
             }
         }
+
         System.out.println("Минимальный элемент массива: " + min);
     }
 }

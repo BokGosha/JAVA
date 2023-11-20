@@ -11,6 +11,7 @@ public class BookShelf {
 
     public Book getLatest() {
         Book latest = books[0];
+
         for (int i = 1; i < books.length; i++) {
             if (books[i].getYear() > latest.getYear()) {
                 latest = books[i];
@@ -33,6 +34,7 @@ public class BookShelf {
 
     public void sortBooks() {
         Book temp;
+
         for (int i = 0; i < books.length; i++) {
             for (int j = i; j < books.length; j++) {
                 if (books[i].getYear() > books[j].getYear()) {

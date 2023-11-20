@@ -7,9 +7,9 @@ public class CircleTester {
         Circle circle3 = new Circle(-5, -4, 2);
 
         System.out.printf("""
-                Периметр первой окружности: %1$f;
-                Площадь: %2$f
-                """, circle1.perimeter(), circle1.square());
+            Периметр первой окружности: %1$f;
+            Площадь: %2$f
+            """, circle1.perimeter(), circle1.square());
 
         System.out.print(circle1.compare(circle2) + " " + circle1.compare(circle3));
     }

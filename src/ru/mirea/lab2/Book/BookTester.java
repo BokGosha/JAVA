@@ -11,7 +11,9 @@ public class BookTester {
 
         System.out.println("Самая ранняя книга: " + shelf.getEarliest());
         System.out.println("Самая поздняя книга: " + shelf.getLatest());
+
         shelf.sortBooks();
+
         System.out.println(shelf);
     }
 }

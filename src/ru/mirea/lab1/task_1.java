@@ -1,4 +1,5 @@
 package ru.mirea.lab1;
+
 import java.util.Scanner;
 
 public class task_1 {
@@ -14,9 +15,11 @@ public class task_1 {
             array[i] = sc.nextInt();
             sum += array[i];
         }
+
         System.out.println("Сумма элементов массива: " + sum);
 
         double sr = sum * 1.0 / array.length;
+
         System.out.println("Среднее арифметическое элементов массива: " + sr);
     }
 }
