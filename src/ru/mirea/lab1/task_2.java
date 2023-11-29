@@ -34,9 +34,9 @@ public class task_2 {
         System.out.println("Максимальный элемент массива: " + max);
 
         int min = array[0];
-        for (int q = 0; q < array.length; q++) {
-            if (min > array[q]) {
-                min = array[q];
+        for (int j : array) {
+            if (min > j) {
+                min = j;
             }
         }
 
